@@ -1,0 +1,148 @@
+**
+code 1
+answer
+
+
+#include <iostream>
+#include <stdlib.h>
+
+#define asize 10
+using namespace std;
+
+ 
+int printRepeating(int arr[], int size)
+{  
+  int count[size];
+  for(int i=0;i<size;i++) 
+  {
+         count[i]=0;
+  } 
+  for (int i = 0; i < size; i++)
+  {
+    count[arr[i]-1]++;
+  }
+  for(int i=0;i<size;i++) 
+  {
+         if(count[i]==2)
+         {
+               return i+1; 
+         }              
+  } 
+  return 0;
+}
+ 
+int main()
+{
+  int arr[asize] ;
+  // enter the 100 numbers
+  for(int i=0;i<asize;i++)
+  {
+      cin>>arr[i];
+  }
+  cout<<printRepeating(arr, asize);
+  getchar();
+  return 0;
+}
+
+
+
+code 3
+answer
+# include <iostream>
+# include <cmath>
+# include <climits>
+
+using namespace std;
+
+// function for partitioning
+int partition(int arr[], int start, int end)
+{
+    int x = arr[end];
+    int i = (start - 1);
+    int j;
+
+    for (j = start; j <= end - 1; j++)
+    {
+	    if(arr[j] <= x)
+	    {
+	              i++;
+	              int temp; // swapping
+                  temp = arr[i];
+                  arr[i] = arr[j];
+                  arr[j] = temp;
+	     }
+    }
+
+    int temp;
+    temp = arr[i];
+    arr[i] = arr[j];
+    arr[j] = temp;
+return (i + 1);
+}
+
+// function for quick sort
+int quickSort(int arr[], int start, int end)
+{
+    int p;
+    if(start < end)
+    {
+	         p = partition(arr, start, end);
+             quickSort(arr, start, p - 1);
+	         quickSort(arr, p + 1, end);
+    }
+ return 0;
+}
+
+
+int  min_Sum_Pair(int arr[], int N)
+{
+
+int sum;
+int min_sum = INT_MAX;
+
+int left = 0, right = N-1;
+
+int min_left = left, min_right = N-1;
+
+quickSort(arr, left, right); // srting using quick sort
+
+while(left < right)
+{
+	sum = arr[left] + arr[right];
+
+	/*If abs(sum) is less then update the result items*/
+	if(abs(sum) < abs(min_sum))
+	{
+	            min_sum = sum;
+	            min_left = left;
+	            min_right = right;
+	}
+	if(sum < 0){
+	       left++;
+        }       
+	else{
+	       right--;
+        }
+}
+
+ cout<<" The two elements with minimum sum closest to zero are "<<arr[min_left]<<" and "<<arr[min_right];
+		
+}
+
+
+int main()
+{
+int arr[] = {15, 5, -20, 30, -45};
+int n = sizeof(arr)/sizeof(arr[0]);
+if(n < 2)
+{
+	cout<<"number of elements should be more than or equal to two";
+
+	return 0;
+}
+min_Sum_Pair(arr, n);
+
+return 0;
+}
+**
+
